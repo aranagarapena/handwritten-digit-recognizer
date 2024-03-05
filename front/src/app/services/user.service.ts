@@ -2,26 +2,25 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
+import { URL_API_USER_GET_ALL, URL_API_USER_REGISTER, URL_BACKEND_DNS } from '../config/config';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private baseUrl = 'http://api-laravel.example.com';
+  private baseUrl = URL_BACKEND_DNS;
 
   constructor(private http: HttpClient) { }
 
-  // TODO-> añadir la gestion de errores
   addUser(userData: any): Observable<any> {
-    return this.http.post(this.baseUrl + '/registro', userData).pipe(
+    return this.http.post(this.baseUrl + URL_API_USER_REGISTER, userData).pipe(
       catchError(this.handleError)
     );
   }
 
   // TODO: faltaría investigar para que si hay un cambio en la BDs se actualice la interfaz sola, por ejemplo si desde otra pestaña del navegador, otro usuario se da de alta, que se actualice en nuestra pantallda 
   getUsers(){
-    return this.http.get<any>(this.baseUrl+'/getusers')
+    return this.http.get<any>(this.baseUrl+URL_API_USER_GET_ALL)
   }
 
   // private handleError(apiError: HttpErrorResponse) {
