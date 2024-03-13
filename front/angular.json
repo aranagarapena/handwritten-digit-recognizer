@@ -36,7 +36,7 @@
             ],
             "styles": [
               "src/styles.css",
-              "https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],         
             "scripts": []
           },
