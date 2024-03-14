@@ -10,12 +10,10 @@ import { HttpClientModule} from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserAddComponent } from './components/user-add/user-add.component';
-import { UserLoginComponent } from './components/user-login/user-login.component';
 
 const routes: Routes = [
   { path: 'list-users', component: UserListComponent },
   { path: 'add-user', component: UserAddComponent },
-  { path: 'user-login', component: UserLoginComponent },
   { path: '', redirectTo: '/list-users', pathMatch: 'full' }, // Redirect to `list-users` as a default route
 ];
 
@@ -23,8 +21,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     UserListComponent,
-    UserAddComponent,
-    UserLoginComponent
+    UserAddComponent
   ],
   imports: [
     BrowserModule,
