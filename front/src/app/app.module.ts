@@ -8,8 +8,8 @@ import { AppComponent } from './app.component';
 import { HttpClientModule} from '@angular/common/http';
 
 import { RouterModule, Routes } from '@angular/router';
-import { UserListComponent } from './components/user-list/user-list.component';
-import { UserAddComponent } from './components/user-add/user-add.component';
+import { UserListComponent } from './components/login/user-list/user-list.component';
+import { UserAddComponent } from './components/login/user-add/user-add.component';
 
 const routes: Routes = [
   { path: 'list-users', component: UserListComponent },
