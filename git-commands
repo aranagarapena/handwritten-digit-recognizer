@@ -4,6 +4,8 @@ git commit -m "First commit" // git commit -m <title> -m <description>
 
 git push origin master
 
+git log
+
 
 /////////////////////////////////////////////////////////////////////
 
