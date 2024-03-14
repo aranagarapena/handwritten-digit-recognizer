@@ -10,6 +10,8 @@ import { HttpClientModule} from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { UserListComponent } from './components/login/user-list/user-list.component';
 import { UserAddComponent } from './components/login/user-add/user-add.component';
+import { UserLoginComponent } from './components/login/user-login/user-login.component';
+import { UserSignInComponent } from './components/login/user-sign-in/user-sign-in.component';
 
 const routes: Routes = [
   { path: 'list-users', component: UserListComponent },
@@ -21,7 +23,9 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     UserListComponent,
-    UserAddComponent
+    UserAddComponent,
+    UserLoginComponent,
+    UserSignInComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,33 @@
+<!-- user-login.component.html -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+<!-- Parte para seleccionar entre Iniciar Sesión y Registrarse -->
+<div class="modal-header">
+    <h5 class="modal-title" id="loginModalLabel">
+      <a href="#" (click)="changeView('login'); $event.preventDefault()">Iniciar Sesión</a> /
+      <a href="#" (click)="changeView('register'); $event.preventDefault()">Registrarse</a>
+    </h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  
+  <!-- Contenido del modal que cambia según la selección -->
+  <div class="modal-body">
+    <ng-container *ngIf="currentView === 'login'">
+      <!-- Aquí deberías incluir el contenido o componente para iniciar sesión -->
+      <app-user-sign-in></app-user-sign-in>
+    </ng-container>
+    <ng-container *ngIf="currentView === 'register'">
+      <!-- Aquí deberías incluir el contenido o componente para registrarse -->
+      <app-user-add></app-user-add>
+    </ng-container>
+  </div>
+  
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
