@@ -3,41 +3,41 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { URL_API_USER_GET_ALL, URL_API_USER_REGISTER, URL_BACKEND_DNS } from '../config/config';
+
+
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class UserService {
 
   private baseUrl = URL_BACKEND_DNS;
 
   constructor(private http: HttpClient) { }
 
+  /*
+    Método para añadir usuario nuevo
+  */
   addUser(userData: any): Observable<any> {
     return this.http.post(this.baseUrl + URL_API_USER_REGISTER, userData).pipe(
       catchError(this.handleError)
     );
   }
 
-  // TODO: faltaría investigar para que si hay un cambio en la BDs se actualice la interfaz sola, por ejemplo si desde otra pestaña del navegador, otro usuario se da de alta, que se actualice en nuestra pantallda 
+  /*
+    - Método para recuperar todos los usuarios de la BDS
+    TODO: faltaría investigar para que si hay un cambio en la BDs se actualice la interfaz sola, por ejemplo si desde otra pestaña del navegador, otro usuario se da de alta, que se actualice en nuestra pantallda 
+
+  
+  */
   getUsers(){
     return this.http.get<any>(this.baseUrl+URL_API_USER_GET_ALL)
   }
 
-  // private handleError(apiError: HttpErrorResponse) {
-  //   let errorMessage = 'Unknown error!';
-  //   // let mens = '';
-  //   if (apiError.error instanceof ErrorEvent) {
-  //     // Client-side errors
-  //     errorMessage = `Error: ${apiError.error.message}`;
-  //   } else {
-  //     // Server-side errors
-  //     errorMessage = `Error Code: ${apiError.status}\nMessage: ${apiError.message}`;
-  //     // mens = apiError.error.errors;
-  //   }
-  //   // console.error("Servicio - Errores:", mens);
-  //   return throwError(() => errorMessage);
-  // }
-
+  /*
+    - Metodo para el manejro de los errores que nos devuelve la API
+  */
   private handleError(apiError: HttpErrorResponse) {
     if (apiError.error instanceof ErrorEvent) {
       // Client-side errors
