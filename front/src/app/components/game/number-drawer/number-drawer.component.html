@@ -1,0 +1,22 @@
+<!-- <h1>Juego!</h1> -->
+<div class="container">
+    <h1 class="text-center mt-5">Dibuja el Número</h1>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6 text-center">
+            <h2>Número a Dibujar: <span>{{ numeroMNIST }}</span></h2>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-6">
+            <canvas #canvas width="400" height="400"></canvas>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-6 text-center">
+            <button class="btn btn-secondary" (click)="borrarTodo()">Borrar Todo</button>
+            <!-- TODO: poner los botones bien en la interfaz -->
+            <button class="btn btn-secondary">Siguiente</button> 
+
+        </div>
+    </div>
+</div>

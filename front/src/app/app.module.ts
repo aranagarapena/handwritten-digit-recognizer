@@ -13,10 +13,12 @@ import { UserAddComponent } from './components/login/user-add/user-add.component
 import { UserLoginComponent } from './components/login/user-login/user-login.component';
 import { UserSignInComponent } from './components/login/user-sign-in/user-sign-in.component';
 import { HomeComponent } from './components/home/home/home.component';
+import { NumberDrawerComponent } from './components/game/number-drawer/number-drawer.component';
 
 const routes: Routes = [
   { path: 'list-users', component: UserListComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'number-drawer', component: NumberDrawerComponent },
   { path: 'add-user', component: UserAddComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirect to `list-users` as a default route
 ];
@@ -28,7 +30,8 @@ const routes: Routes = [
     UserAddComponent,
     UserLoginComponent,
     UserSignInComponent,
-    HomeComponent
+    HomeComponent,
+    NumberDrawerComponent
     ],
   imports: [
     BrowserModule,
