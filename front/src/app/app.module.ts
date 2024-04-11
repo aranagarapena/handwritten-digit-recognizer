@@ -12,11 +12,13 @@ import { UserListComponent } from './components/login/user-list/user-list.compon
 import { UserAddComponent } from './components/login/user-add/user-add.component';
 import { UserLoginComponent } from './components/login/user-login/user-login.component';
 import { UserSignInComponent } from './components/login/user-sign-in/user-sign-in.component';
+import { HomeComponent } from './components/home/home/home.component';
 
 const routes: Routes = [
   { path: 'list-users', component: UserListComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'add-user', component: UserAddComponent },
-  { path: '', redirectTo: '/list-users', pathMatch: 'full' }, // Redirect to `list-users` as a default route
+  { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirect to `list-users` as a default route
 ];
 
 @NgModule({
@@ -25,8 +27,9 @@ const routes: Routes = [
     UserListComponent,
     UserAddComponent,
     UserLoginComponent,
-    UserSignInComponent
-  ],
+    UserSignInComponent,
+    HomeComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -37,6 +40,6 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent] // componente que se inicia al arrancar la app
 })
 export class AppModule { }
