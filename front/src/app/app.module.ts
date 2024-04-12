@@ -1,27 +1,25 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
 import { HttpClientModule} from '@angular/common/http';
-
 import { RouterModule, Routes } from '@angular/router';
+
 import { UserListComponent } from './components/login/user-list/user-list.component';
 import { UserAddComponent } from './components/login/user-add/user-add.component';
 import { UserLoginComponent } from './components/login/user-login/user-login.component';
 import { UserSignInComponent } from './components/login/user-sign-in/user-sign-in.component';
 import { HomeComponent } from './components/home/home/home.component';
 import { NumberDrawerComponent } from './components/game/number-drawer/number-drawer.component';
+import { AppComponent } from './app.component';
 
-const routes: Routes = [
-  { path: 'list-users', component: UserListComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'number-drawer', component: NumberDrawerComponent },
-  { path: 'add-user', component: UserAddComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirect to `list-users` as a default route
-];
+// const routes: Routes = [
+//   { path: 'list-users', component: UserListComponent },
+//   { path: 'home', component: HomeComponent },
+//   { path: 'number-drawer', component: NumberDrawerComponent },
+//   { path: 'add-user', component: UserAddComponent },
+//   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirige aquí como ruta por defecto
+// ];
 
 @NgModule({
   declarations: [
@@ -37,9 +35,7 @@ const routes: Routes = [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
-    RouterModule.forRoot(routes) // Add this line
-
+    FormsModule
   ],
   exports: [RouterModule],
   providers: [],
