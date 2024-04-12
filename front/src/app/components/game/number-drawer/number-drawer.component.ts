@@ -56,17 +56,18 @@ export class NumberDrawerComponent implements AfterViewInit {
   ngOnInit(): void {
   }
 
+  enviarDibujo(): void{
+
+  }
+
   generarNumeroAleatorio(): number {
     // Simulación de obtención de un número aleatorio, ajusta según tu lógica
     return Math.floor(Math.random() * 10);
   }
 
-  verificarDibujo(): void {
-    // Aquí iría la lógica para verificar el dibujo
-    console.log('Verificar dibujo');
-  }
-
   borrarTodo(): void {
     this.ctx.clearRect(0, 0, this.canvasRef.nativeElement.width, this.canvasRef.nativeElement.height);
   }
+
+
 }
