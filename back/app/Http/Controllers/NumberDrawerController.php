@@ -7,14 +7,45 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use App\Responses\ApiErrorResponse;
 use App\Responses\ApiSuccessResponse;
+use App\Models\Drawing;
 
 class NumberDrawerController extends Controller
 {
     public function storeNumber(Request $request){
-        
-        return response()->json([
-            'received_data' => $request->all()
+
+        // TODO: Repasar la validacion. Seguir el ejemplo de UserController
+        $request->validate([
+            'image' => 'required|string',
+            'metadata' => 'required|array'
         ]);
+
+        try {
+            // Solo para propósitos de prueba
+            file_put_contents('C:/Users/admin/test.txt', 'Hello World');
+
+            $imageData = $request->image;
+            $metadata = $request->metadata;
+
+            list(, $imageData) = explode(',', $imageData);
+            $imageData = base64_decode($imageData);
+
+            $filename = 'image_' . time() . '.png';
+            $userImagePath = config('paths.user_images');
+            file_put_contents('C:/Users/admin', $imageData);
+
+            $drawing = new Drawing([
+                'image_path' => $userImagePath,
+                'label' => $metadata['label'],
+                'user_id' => $metadata['userId'] ?? null
+            ]);
+            $drawing->save();
+        
+            return response()->json(['success' => 'Image uploaded successfully', 'path' => $userImagePath]);
+        } 
+        catch (\Exception $exception) {
+            $m = $exception->getMessage();
+            return response()->json(['error' => 'Ocurrió un error inesperado.', 'details' => $exception->getMessage()], 500);
+        }
 
         // try {
         //     // Inicia una transacción de base de datos
