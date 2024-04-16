@@ -13,8 +13,9 @@ export class NumberService {
 
   constructor(private http: HttpClient) { }
 
-  addNumber(userData: any): Observable<any> {
-    return this.http.post('https://jsonplaceholder.typicode.com/post', userData).pipe(
+  // método para insertar un número dibujado a mano en el servidor
+  addNumber(payload: any): Observable<any> {
+    return this.http.post(this.baseUrl + '/api/game/storenumber', payload).pipe(
       catchError(this.handleError)
     );
   }

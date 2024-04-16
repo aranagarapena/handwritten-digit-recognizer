@@ -66,7 +66,9 @@ export class NumberDrawerComponent implements AfterViewInit {
 
   // --------------------------------------------- METODOS ASOCIADOS AL ENVIO DE NÚMEROS AL SERVIDOR ---------------------------------------
   enviarDibujo(): void{
+    
     const imageData = this.ctx.getImageData(0, 0, this.canvasRef.nativeElement.width, this.canvasRef.nativeElement.height);
+    
     // Convertir a escala de grises (opcional según tus necesidades)
     for (let i = 0; i < imageData.data.length; i += 4) {
       const avg = (imageData.data[i] + imageData.data[i + 1] + imageData.data[i + 2]) / 3;
@@ -80,35 +82,28 @@ export class NumberDrawerComponent implements AfterViewInit {
     const dataUrl = this.canvasRef.nativeElement.toDataURL('image/png');
     // console.log(dataUrl);
 
-    // enviar al servicios
-    this.addNumber(dataUrl);
+    // generamos el objeto que queremos enviar al servidor
+    const payload = {
+      image: dataUrl,
+      metadata: {
+        timestamp: new Date().toISOString(),
+        label: this.numeroMNIST,
+        userId: null
+        // userId: userId || null // TODO: Cuando implemente el inicio de sesión, aquí hay que añadir la posibilidad de ingresar el ID de usuario en la BDs
+      }
+    };
+
+    // enviar número al servicios
+    this.addNumber(payload);
+
+    // TODO: falta generar un nuevo número y poner el lienzo en blanco
   }
 
   /*
     Llamada al servicio para insertar el dibujo en la BDs
   */
-  private addNumber(number : string) {
+  private addNumber(number : Object) {
     this.errorMessage = [];
-    this.numberService.addNumber(number).subscribe({
-      next: (response) => {
-        
-        console.log('Número insertado con exito', response);
-        // redirección a la lista de
-        this.router.navigate(['/number-drawer']);
-
-      },
-      error: (error) => {
-        console.log("Error/es al insertar el número: ", error);
-        // if (error.messages !== undefined) {
-        //   error.messages.forEach((messageArray: string[]) => {
-        //     messageArray.forEach((message) => {
-        //       this.errorMessage.push(message);
-        //     });
-        //   });        }
-
-      }
-    });
-
     this.numberService.addNumber(number).subscribe({
       next: (response) => {
         

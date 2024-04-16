@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\NumberDrawerController;
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,3 +33,7 @@ Route::post('/usuarios/signin', [UsuarioController::class, 'store']);
 
 // Recuperar todos los usuarios de la BD
 Route::get('/usuarios/getusers', [UsuarioController::class, 'getAllUsers']);
+
+// Rutas del JUEGO
+Route::post('/game/storenumber', [NumberDrawerController::class, 'storeNumber']);
+
