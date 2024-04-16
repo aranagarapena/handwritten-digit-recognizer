@@ -105,7 +105,6 @@ class UsuarioController extends Controller
         }
         
     }
-
     public function getAllUsers(){
         
         $users = User::all();

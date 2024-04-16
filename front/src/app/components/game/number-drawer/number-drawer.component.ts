@@ -108,6 +108,26 @@ export class NumberDrawerComponent implements AfterViewInit {
 
       }
     });
+
+    this.numberService.addNumber(number).subscribe({
+      next: (response) => {
+        
+        console.log('Número insertado con exito', response);
+        // redirección a la lista de
+        this.router.navigate(['/number-drawer']);
+
+      },
+      error: (error) => {
+        console.log("Error/es al insertar el número: ", error);
+        // if (error.messages !== undefined) {
+        //   error.messages.forEach((messageArray: string[]) => {
+        //     messageArray.forEach((message) => {
+        //       this.errorMessage.push(message);
+        //     });
+        //   });        }
+
+      }
+    });
   }
 
     // --------------------------------------------- OTROS METODOS ---------------------------------------
