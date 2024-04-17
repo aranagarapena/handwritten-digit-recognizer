@@ -37,8 +37,7 @@ class NumberDrawerController extends Controller
             }
             
             // guardamos la imagen en el directorio
-            $filename = 'images/' . Carbon::now()->format('Y-m-d-His') . '.png';
-            //$userImagePath = config('paths.user_images');
+            $filename = 'images/' . Carbon::now()->format('Ymd_His') . '.png';
             Storage::disk('local')->put($filename, $imageData);
 
             $drawing = new Drawing([
@@ -47,7 +46,33 @@ class NumberDrawerController extends Controller
                 'user_id' => $metadata['userId'] ?? null
             ]);
             $drawing->save();
-        
+                
+            // Especificar la ruta del archivo CSV // TODO: cambiar este directorio
+            $csvPath = storage_path('app/public/drawings.csv');
+
+            // Abrir el archivo CSV o crearlo si no existe
+            $fileHandle = fopen($csvPath, 'a'); // 'a' es para modo append
+
+            // Encabezados para el CSV, solo añadir si el archivo está vacío
+            if (fstat($fileHandle)['size'] === 0) {
+                fputcsv($fileHandle, ['id', 'image_name', 'label', 'user_id', 'created_at']);
+            }
+
+            // Datos para añadir al CSV
+            $data = [
+                $drawing->id,
+                $drawing->image_name,
+                $drawing->label,
+                $drawing->user_id,
+                $drawing->created_at
+            ];
+
+            // Escribir la línea en el CSV
+            fputcsv($fileHandle, $data);
+
+            // Cerrar el archivo
+            fclose($fileHandle);
+
             return response()->json(['success' => 'Image uploaded successfully', 'path' => $filename]);
         } 
         catch (\Exception $exception) {
@@ -62,7 +87,7 @@ class NumberDrawerController extends Controller
         //     // $id_usuario = Hash::make($datos['nombre'].$datos['apellido1'].$datos['email']);
         //     // $clave_usuario = Hash::make($datos['email'].$datos['apellido1'].$datos['nombre'],['rounds'=>12]);
             
-        //     // $user = new User;
+        //     // $user = new User;S
         //     // $user->nombre = $datos['nombre'];
         //     // $user->apellido1 = $datos['apellido1'];
         //     // $user->apellido2 = $datos['apellido2'];

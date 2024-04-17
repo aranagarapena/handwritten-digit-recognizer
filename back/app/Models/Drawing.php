@@ -7,4 +7,5 @@ class Drawing extends Model
 {
     use HasFactory;
     protected $table='drawings';
+    protected $fillable = ['image_name', 'label', 'user_id'];
 }
