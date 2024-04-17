@@ -8,6 +8,8 @@ use Illuminate\Database\QueryException;
 use App\Responses\ApiErrorResponse;
 use App\Responses\ApiSuccessResponse;
 use App\Models\Drawing;
+use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class NumberDrawerController extends Controller
 {
@@ -20,27 +22,33 @@ class NumberDrawerController extends Controller
         ]);
 
         try {
-            // Solo para propósitos de prueba
-            file_put_contents('C:/Users/admin/test.txt', 'Hello World');
 
+            // recogemos la imagen del request
             $imageData = $request->image;
             $metadata = $request->metadata;
 
             list(, $imageData) = explode(',', $imageData);
             $imageData = base64_decode($imageData);
 
-            $filename = 'image_' . time() . '.png';
-            $userImagePath = config('paths.user_images');
-            file_put_contents('C:/Users/admin', $imageData);
+            // creamos el directorio de almacenamiento en caso de que no exista
+            $directory = 'images';  // Ruta relativa dentro de storage/app
+            if (!Storage::disk('local')->exists($directory)) {
+                Storage::disk('local')->makeDirectory($directory);
+            }
+            
+            // guardamos la imagen en el directorio
+            $filename = 'images/' . Carbon::now()->format('Y-m-d-His') . '.png';
+            //$userImagePath = config('paths.user_images');
+            Storage::disk('local')->put($filename, $imageData);
 
             $drawing = new Drawing([
-                'image_path' => $userImagePath,
+                'image_name' => $filename,
                 'label' => $metadata['label'],
                 'user_id' => $metadata['userId'] ?? null
             ]);
             $drawing->save();
         
-            return response()->json(['success' => 'Image uploaded successfully', 'path' => $userImagePath]);
+            return response()->json(['success' => 'Image uploaded successfully', 'path' => $filename]);
         } 
         catch (\Exception $exception) {
             $m = $exception->getMessage();
