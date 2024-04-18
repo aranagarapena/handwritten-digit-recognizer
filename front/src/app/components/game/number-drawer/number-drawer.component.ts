@@ -11,6 +11,7 @@ export class NumberDrawerComponent implements AfterViewInit {
   
   errorMessage : string[] = [];
   numeroMNIST: number;
+  hasDrawn: boolean = false;
 
   @ViewChild('canvas') canvasRef!: ElementRef<HTMLCanvasElement>;
   private ctx!: CanvasRenderingContext2D;
@@ -40,6 +41,12 @@ export class NumberDrawerComponent implements AfterViewInit {
   startDrawing(event: MouseEvent): void {
     this.drawing = true;
     this.draw(event);
+    this.hasDrawn = true;
+
+  }
+
+  terminar(): void {
+    this.router.navigate(['/home']);
   }
 
   draw(event: MouseEvent): void {
@@ -62,6 +69,8 @@ export class NumberDrawerComponent implements AfterViewInit {
 
   borrarTodo(): void {
     this.ctx.clearRect(0, 0, this.canvasRef.nativeElement.width, this.canvasRef.nativeElement.height);
+    this.hasDrawn = false;
+
   }
 
   // --------------------------------------------- METODOS ASOCIADOS AL ENVIO DE NÚMEROS AL SERVIDOR ---------------------------------------
@@ -97,6 +106,8 @@ export class NumberDrawerComponent implements AfterViewInit {
     this.addNumber(payload);
 
     // TODO: falta generar un nuevo número y poner el lienzo en blanco
+    this.numeroMNIST = this.generarNumeroAleatorio();
+    this.borrarTodo();
   }
 
   /*

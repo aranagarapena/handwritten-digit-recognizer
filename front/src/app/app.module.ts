@@ -13,13 +13,6 @@ import { HomeComponent } from './components/home/home/home.component';
 import { NumberDrawerComponent } from './components/game/number-drawer/number-drawer.component';
 import { AppComponent } from './app.component';
 
-// const routes: Routes = [
-//   { path: 'list-users', component: UserListComponent },
-//   { path: 'home', component: HomeComponent },
-//   { path: 'number-drawer', component: NumberDrawerComponent },
-//   { path: 'add-user', component: UserAddComponent },
-//   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirige aquí como ruta por defecto
-// ];
 
 @NgModule({
   declarations: [

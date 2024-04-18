@@ -1,4 +1,3 @@
-<!-- <h1>Juego!</h1> -->
 <div class="container">
     <h1 class="text-center mt-5">Dibuja el Número</h1>
     <div class="row justify-content-center mt-5">
@@ -13,10 +12,12 @@
     </div>
     <div class="row justify-content-center mt-3">
         <div class="col-md-6 text-center">
-            <button class="btn btn-secondary" (click)="borrarTodo()">Borrar Todo</button>
-            <!-- TODO: poner los botones bien en la interfaz -->
-            <button class="btn btn-secondary" (click)="enviarDibujo()">Siguiente</button> 
-
+            <button class="btn btn-secondary" (click)="enviarDibujo()" [disabled]="!hasDrawn">Siguiente</button>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-2"> 
+        <div class="col-md-6 text-center">
+            <button class="btn btn-danger" (click)="terminar()">Terminar</button>
         </div>
     </div>
 </div>

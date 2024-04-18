@@ -21,7 +21,7 @@ class NumberDrawerController extends Controller
             if (preg_match('/^data:image\/(\w+);base64,/', $value, $type)) {
                 $data = substr($value, strpos($value, ',') + 1);
                 $type = strtolower($type[1]); // jpg, png, gif
-    
+                
                 if (!in_array($type, ['jpg', 'jpeg', 'gif', 'png'])) {
                     return false;
                 }
@@ -62,7 +62,7 @@ class NumberDrawerController extends Controller
             // Si la validación falla, devuelve un error 422 con los mensajes de error
             return response()->json($errorResponse->toArray(), $errorResponse->code);
         }
-        
+
         try {
             DB::beginTransaction();
 
