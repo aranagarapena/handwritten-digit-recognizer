@@ -14,7 +14,7 @@ use App\Responses\ApiSuccessResponse;
 
 class UsuarioController extends Controller
 {
-    //
+    
     public function store(Request $request){
         
         // Reglas de validación
