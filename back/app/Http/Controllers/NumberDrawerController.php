@@ -37,7 +37,7 @@ class NumberDrawerController extends Controller
             }
             
             // guardamos la imagen en el directorio
-            $filename = 'images/' . Carbon::now()->format('Ymd_His') . '.png';
+            $filename = 'images/' . Carbon::now()->format('Y-m-d_H-i-s') . '.png'; // TODO: cambiar a Y-M-D_H-M-s
             Storage::disk('local')->put($filename, $imageData);
 
             $drawing = new Drawing([
@@ -47,8 +47,8 @@ class NumberDrawerController extends Controller
             ]);
             $drawing->save();
                 
-            // Especificar la ruta del archivo CSV // TODO: cambiar este directorio
-            $csvPath = storage_path('app/public/drawings.csv');
+            // Especificar la ruta del archivo CSV 
+            $csvPath = storage_path('app/images/drawings.csv');
 
             // Abrir el archivo CSV o crearlo si no existe
             $fileHandle = fopen($csvPath, 'a'); // 'a' es para modo append
