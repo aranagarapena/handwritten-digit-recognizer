@@ -5,3 +5,18 @@
   canvas {
     border: 1px solid #000;
   }
+  .miniaturas {
+    border: none; /* Sin borde para el contenedor de miniaturas */
+    padding: 0;
+    margin-top: 3.25rem; /* Ajusta esta cantidad para alinear con la parte superior del lienzo */
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.img-thumbnail {
+    max-width: 50px; /* Tamaño de las miniaturas */
+    height: auto;
+    margin: 2px;
+    border: 1px solid #ddd; /* Borde restaurado para las miniaturas */
+}
+

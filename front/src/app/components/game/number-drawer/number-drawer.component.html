@@ -1,23 +1,23 @@
 <div class="container">
     <h1 class="text-center mt-5">Dibuja el Número</h1>
     <div class="row justify-content-center mt-5">
-        <div class="col-md-6 text-center">
+        <div class="col-md-4"> <!-- Espacio vacío del lado izquierdo -->
+        </div>
+        <div class="col-md-4 text-center"> <!-- Lienzo centrado -->
             <h2>Número a Dibujar: <span>{{ numeroMNIST }}</span></h2>
-        </div>
-    </div>
-    <div class="row justify-content-center mt-3">
-        <div class="col-md-6">
             <canvas #canvas width="400" height="400"></canvas>
+            <div class="mt-3">
+                <button class="btn btn-secondary mr-2" (click)="enviarDibujo()" [disabled]="!hasDrawn">Siguiente</button>
+                <button class="btn btn-primary" (click)="borrarTodo()">Borrar</button>
+            </div>
+            <div class="mt-2">
+                <button class="btn btn-danger" (click)="terminar()">Terminar</button>
+            </div>
         </div>
-    </div>
-    <div class="row justify-content-center mt-3">
-        <div class="col-md-6 text-center">
-            <button class="btn btn-secondary" (click)="enviarDibujo()" [disabled]="!hasDrawn">Siguiente</button>
-        </div>
-    </div>
-    <div class="row justify-content-center mt-2"> 
-        <div class="col-md-6 text-center">
-            <button class="btn btn-danger" (click)="terminar()">Terminar</button>
+        <div class="col-md-4"> <!-- Miniaturas en el tercio derecho, alineadas con el lienzo -->
+            <div class="miniaturas" style="max-height: 400px; overflow-y: auto;">
+                <img *ngFor="let image of miniaturas" [src]="image" class="img-thumbnail">
+            </div>
         </div>
     </div>
 </div>

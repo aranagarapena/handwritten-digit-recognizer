@@ -12,11 +12,13 @@ export class NumberDrawerComponent implements AfterViewInit {
   errorMessage : string[] = [];
   numeroMNIST: number;
   hasDrawn: boolean = false;
+  miniaturas: string[] = [];
 
   @ViewChild('canvas') canvasRef!: ElementRef<HTMLCanvasElement>;
   private ctx!: CanvasRenderingContext2D;
   private drawing = false;
 
+    // --------------------------------------------- REALIZAMOS ESTO AL INICIAR EL COMPONENTE ---------------------------------------
   constructor(private numberService: NumberService, private router: Router) {
     // Aquí puedes inicializar el número MNIST aleatoriamente
     this.numeroMNIST = this.generarNumeroAleatorio();
@@ -90,6 +92,7 @@ export class NumberDrawerComponent implements AfterViewInit {
     // Convertir a Base64
     const dataUrl = this.canvasRef.nativeElement.toDataURL('image/png');
     // console.log(dataUrl);
+    this.miniaturas.push(dataUrl);
 
     // generamos el objeto que queremos enviar al servidor
     const payload = {
@@ -105,11 +108,13 @@ export class NumberDrawerComponent implements AfterViewInit {
     // enviar número al servicios
     this.addNumber(payload);
 
-    // TODO: falta generar un nuevo número y poner el lienzo en blanco
     this.numeroMNIST = this.generarNumeroAleatorio();
     this.borrarTodo();
   }
 
+  // todo: falta poner el boton de borrar por si el user se equivoca al dibujar y ordenar los botones
+  // todo: animacion de que crezcan las imagenes cuando paso el raton por encima
+  // todo: que al clickar una imagen se haga en pantalla completa
   /*
     Llamada al servicio para insertar el dibujo en la BDs
   */
