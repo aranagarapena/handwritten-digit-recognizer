@@ -1,22 +1,34 @@
 .container {
-    text-align: center;
-  }
-  
-  canvas {
-    border: 1px solid #000;
-  }
-  .miniaturas {
-    border: none; /* Sin borde para el contenedor de miniaturas */
-    padding: 0;
-    margin-top: 3.25rem; /* Ajusta esta cantidad para alinear con la parte superior del lienzo */
-    max-height: 400px;
-    overflow-y: auto;
+  text-align: center;
+}
+
+canvas {
+  border: 1px solid #000;
+}
+
+.miniaturas {
+  border: none;
+  padding: 10px;
+  margin-top: 3.25rem; /* Ajusta esta cantidad para alinear con la parte superior del lienzo */
+  width: 100%; /* O el ancho deseado para mantenerse dentro del tercio derecho */
+  max-height: 400px;
+  overflow-y: auto; /* Barra de desplazamiento vertical cuando es necesario */
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos fluyan en múltiples líneas */
+  justify-content: flex-start; /* Alinea las miniaturas al inicio del contenedor */
+  align-items: flex-start; /* Alinea los elementos al inicio verticalmente */
 }
 
 .img-thumbnail {
-    max-width: 50px; /* Tamaño de las miniaturas */
-    height: auto;
-    margin: 2px;
-    border: 1px solid #ddd; /* Borde restaurado para las miniaturas */
+  width: 50px;
+  height: auto;
+  margin: 2px;
+  border: 1px solid #ddd;
+  transition: transform 0.3s ease-in-out;
+}
+
+.img-thumbnail:hover {
+  transform: scale(1.3);
+  z-index: 1; /* Asegura que la imagen se eleve por encima de las demás al escalar */
 }
 
