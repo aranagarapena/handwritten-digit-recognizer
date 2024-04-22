@@ -5,6 +5,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageDetailsModalComponent } from '../image-details-modal/image-details-modal.component';
 import { Drawing } from '../../../models/drawing.model';
 
+/*
+  TODO: Cuando implemente el inicio de sesión, aquí hay que añadir la posibilidad de ingresar el ID de usuario en la BDs
+  TODO: Queda pendiente trabajar con objetos Drawing (como en el modal) y pasarlos al backend. Hay dos arrays de miniaturas y uno de ellos es tipo string
+  TODO: Habría que leer de la BDs las miniaturas si se les hace click encima y dar la posibilidad de editarlas
+*/
 @Component({
   selector: 'app-number-drawer',
   templateUrl: './number-drawer.component.html',
@@ -82,13 +87,8 @@ export class NumberDrawerComponent implements AfterViewInit {
 
   openDetailsModal(index: number) {
     const modalRef = this.modalService.open(ImageDetailsModalComponent);
-    modalRef.componentInstance.data = {
-      image: this.miniaturas[index],
-      metadata: {
-        timestamp: "Fecha de Creación",  // Aquí puedes agregar los detalles reales
-        label: this.numeroMNIST
-      }
-    };
+    modalRef.componentInstance.drawing = this.miniaturasDrawing[index];
+
   } 
 
 
@@ -118,11 +118,11 @@ export class NumberDrawerComponent implements AfterViewInit {
         timestamp: new Date().toISOString(),
         label: this.numeroMNIST,
         userId: null
-        // userId: userId || null // TODO: Cuando implemente el inicio de sesión, aquí hay que añadir la posibilidad de ingresar el ID de usuario en la BDs
+        // userId: userId || null 
       }
     };
 
-    const drawing = new Drawing(dataUrl, this.numeroMNIST, new Date().toISOString());
+    const drawing = new Drawing(dataUrl, this.numeroMNIST, new Date().toISOString());  
     this.miniaturasDrawing.push(drawing);
 
     // enviar número al servicios
@@ -132,7 +132,6 @@ export class NumberDrawerComponent implements AfterViewInit {
     this.borrarTodo();
   }
 
-  // todo: que al clickar una imagen se haga en pantalla completa
   /*
     Llamada al servicio para insertar el dibujo en la BDs
   */
