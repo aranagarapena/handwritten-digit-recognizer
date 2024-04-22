@@ -1,6 +1,9 @@
 import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { NumberService } from '../../../services/number/number.service';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ImageDetailsModalComponent } from '../image-details-modal/image-details-modal.component';
+import { Drawing } from '../../../models/drawing.model';
 
 @Component({
   selector: 'app-number-drawer',
@@ -13,13 +16,15 @@ export class NumberDrawerComponent implements AfterViewInit {
   numeroMNIST: number;
   hasDrawn: boolean = false;
   miniaturas: string[] = [];
+  miniaturasDrawing: Drawing[] = [];
+
 
   @ViewChild('canvas') canvasRef!: ElementRef<HTMLCanvasElement>;
   private ctx!: CanvasRenderingContext2D;
   private drawing = false;
 
     // --------------------------------------------- REALIZAMOS ESTO AL INICIAR EL COMPONENTE ---------------------------------------
-  constructor(private numberService: NumberService, private router: Router) {
+  constructor(private numberService: NumberService, private router: Router, private modalService: NgbModal) {
     // Aquí puedes inicializar el número MNIST aleatoriamente
     this.numeroMNIST = this.generarNumeroAleatorio();
   }
@@ -75,6 +80,18 @@ export class NumberDrawerComponent implements AfterViewInit {
 
   }
 
+  openDetailsModal(index: number) {
+    const modalRef = this.modalService.open(ImageDetailsModalComponent);
+    modalRef.componentInstance.data = {
+      image: this.miniaturas[index],
+      metadata: {
+        timestamp: "Fecha de Creación",  // Aquí puedes agregar los detalles reales
+        label: this.numeroMNIST
+      }
+    };
+  } 
+
+
   // --------------------------------------------- METODOS ASOCIADOS AL ENVIO DE NÚMEROS AL SERVIDOR ---------------------------------------
   enviarDibujo(): void{
     
@@ -105,6 +122,9 @@ export class NumberDrawerComponent implements AfterViewInit {
       }
     };
 
+    const drawing = new Drawing(dataUrl, this.numeroMNIST, new Date().toISOString());
+    this.miniaturasDrawing.push(drawing);
+
     // enviar número al servicios
     this.addNumber(payload);
 
@@ -112,8 +132,6 @@ export class NumberDrawerComponent implements AfterViewInit {
     this.borrarTodo();
   }
 
-  // todo: falta poner el boton de borrar por si el user se equivoca al dibujar y ordenar los botones
-  // todo: animacion de que crezcan las imagenes cuando paso el raton por encima
   // todo: que al clickar una imagen se haga en pantalla completa
   /*
     Llamada al servicio para insertar el dibujo en la BDs
@@ -140,10 +158,11 @@ export class NumberDrawerComponent implements AfterViewInit {
       }
     });
   }
-
     // --------------------------------------------- OTROS METODOS ---------------------------------------
   generarNumeroAleatorio(): number {
     // Simulación de obtención de un número aleatorio, ajusta según tu lógica
     return Math.floor(Math.random() * 10);
   }
+
+  
 }

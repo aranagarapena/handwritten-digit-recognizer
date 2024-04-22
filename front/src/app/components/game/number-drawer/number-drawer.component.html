@@ -16,8 +16,11 @@
         </div>
         <div class="col-md-4"> <!-- Miniaturas en el tercio derecho, alineadas con el lienzo -->
             <div class="miniaturas" style="max-height: 400px; overflow-y: auto;">
-                <img *ngFor="let image of miniaturas" [src]="image" class="img-thumbnail miniatura-img">
+                <img *ngFor="let image of miniaturas; let i = index" [src]="image" class="img-thumbnail miniatura-img" (click)="openDetailsModal(i)">
             </div>
         </div>
     </div>
 </div>
+
+
+

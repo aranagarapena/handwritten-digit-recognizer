@@ -12,6 +12,8 @@ import { UserSignInComponent } from './components/login/user-sign-in/user-sign-i
 import { HomeComponent } from './components/home/home/home.component';
 import { NumberDrawerComponent } from './components/game/number-drawer/number-drawer.component';
 import { AppComponent } from './app.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ImageDetailsModalComponent } from './components/game/image-details-modal/image-details-modal.component';
 
 
 @NgModule({
@@ -22,13 +24,15 @@ import { AppComponent } from './app.component';
     UserLoginComponent,
     UserSignInComponent,
     HomeComponent,
-    NumberDrawerComponent
+    NumberDrawerComponent,
+    ImageDetailsModalComponent
     ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   exports: [RouterModule],
   providers: [],
